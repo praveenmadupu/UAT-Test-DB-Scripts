@@ -1,0 +1,9 @@
+--Change DB Owner Name of all user DB's
+
+
+sp_helpdb
+go
+SELECT 'use '+QUOTENAME(name)+ 'exec sp_changedbowner @loginame =''sa'' ' 
+FROM sys.databases AS d 
+WHERE d.database_id > 4 
+and d.is_read_only = 0
